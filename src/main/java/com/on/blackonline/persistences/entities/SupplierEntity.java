@@ -13,7 +13,7 @@ import lombok.Data;
 @Data
 public class SupplierEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long supplier_id;
 
     @Column(name = "name")
