@@ -1,8 +1,6 @@
 package com.on.blackonline.services;
 
-import java.util.Optional;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,22 +13,16 @@ public class SupplierService {
     @Autowired
     SupplierRepository supplierRepository;
 
-    public Optional<SupplierEntity> getSupplier(Long id){
-        return supplierRepository.findById(id);
-    }
-
-    public List<SupplierEntity> getSuppliers(){
-        return supplierRepository.findAll();
-    }
-
     public SupplierEntity saveSupplier(SupplierEntity supplier){
         return supplierRepository.save(supplier);
     }
 
-    public Optional<SupplierEntity> deleteSupplier(Long id){
-        Optional<SupplierEntity> supplier = supplierRepository.findById(id);
-        supplierRepository.deleteById(id);
-        return supplier;
+    public SupplierEntity getSupplier(Long id){
+        return supplierRepository.findById(id).get();
+    }
+
+    public List<SupplierEntity> getSuppliers(){
+        return supplierRepository.findAll();
     }
 
     public SupplierEntity updateSupplier(SupplierEntity request, Long id){
@@ -42,5 +34,9 @@ public class SupplierService {
         supplier.setAddress(request.getAddress());
 
         return supplierRepository.save(supplier);
+    }
+
+    public void deleteSupplier(Long id){
+        supplierRepository.deleteById(id);
     }
 }

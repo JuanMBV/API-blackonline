@@ -1,11 +1,10 @@
 package com.on.blackonline.controllers;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +27,7 @@ public class SupplierController {
 	}
 
 	@GetMapping("/{id}")
-	public Optional<SupplierEntity> getSupplier(Long id){
+	public SupplierEntity getSupplier(@PathVariable Long id){
 		return supplierService.getSupplier(id);
 	}
 
@@ -37,13 +36,13 @@ public class SupplierController {
 		return supplierService.saveSupplier(supplier);
 	}
 
-	@DeleteMapping
-	public Optional<SupplierEntity> deleteSupplier(Long id){
-		return supplierService.deleteSupplier(id);
+	@DeleteMapping("/{id}")
+	public void deleteSupplier(@PathVariable Long id){
+		supplierService.deleteSupplier(id);
 	}
-
-	@PutMapping
-	public SupplierEntity updateSupplier(@RequestBody SupplierEntity supplier, Long id){
+	
+	@PutMapping("/{id}")
+	public SupplierEntity updateSupplier(@RequestBody SupplierEntity supplier, @PathVariable Long id){
 		return supplierService.updateSupplier(supplier, id);
 	}
 }
