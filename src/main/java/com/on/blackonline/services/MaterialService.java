@@ -30,7 +30,6 @@ public class MaterialService {
 		MaterialEntity material = materialRepository.findById(id).get();
 
 		material.setPrice(request.getPrice());
-		material.setMaterialPurchase(request.getMaterialPurchase());
 
 		return materialRepository.save(material);
 	} 
