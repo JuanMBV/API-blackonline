@@ -30,6 +30,7 @@ public class TechniqueService {
         TechniqueEntity technique = techniqueRepository.findById(id).get();
 
         technique.setName(request.getName());
+        technique.setDescription(request.getDescription());
         technique.setPrice(request.getPrice());
 
         return techniqueRepository.save(technique);
