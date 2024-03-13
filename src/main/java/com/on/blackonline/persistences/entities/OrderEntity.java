@@ -1,6 +1,6 @@
 package com.on.blackonline.persistences.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,27 +14,29 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "quotes")
-public class QuoteEntity {
-  
+@Table(name = "orders")
+public class OrderEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long quote_id;
+    private Long order_id;
 
-    @Column(name = "total_price")
-    private int totalPrice;
+    @Column(name = "delivery_date")
+    private LocalDate deliveryDate;
 
-    @Column(name = "quote_date")
-    private LocalDateTime quoteDate;
+    @Column(name = "reference")
+    private String reference;
 
-    @Column(name = "advance_payment")
-    private int advancePayment;
+    @Column(name = "status")
+    private String status;
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private ClientEntity client;
+    // Analizar employees
 
     @ManyToOne
-    @JoinColumn(name = "work_id")
-    private WorkEntity work;
+    @JoinColumn(name = "employee_id")
+    private EmployeeEntity employee;
+
+    @ManyToOne
+    @JoinColumn(name = "quote_id")
+    private QuoteEntity quote; 
 }
