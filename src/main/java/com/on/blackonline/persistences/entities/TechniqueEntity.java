@@ -2,8 +2,6 @@ package com.on.blackonline.persistences.entities;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -42,5 +40,5 @@ public class TechniqueEntity {
         joinColumns = @JoinColumn(name = "technique_id"),
         inverseJoinColumns = @JoinColumn(name = "material_id") 
     )
-    private List<MaterialEntity> materialss;
+    private List<MaterialEntity> materials;
 }

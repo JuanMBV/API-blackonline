@@ -32,6 +32,7 @@ public class TechniqueService {
         technique.setName(request.getName());
         technique.setDescription(request.getDescription());
         technique.setPrice(request.getPrice());
+        technique.setMaterials(request.getMaterials());
 
         return techniqueRepository.save(technique);
     }

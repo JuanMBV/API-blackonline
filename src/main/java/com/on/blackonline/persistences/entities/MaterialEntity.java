@@ -32,6 +32,6 @@ public class MaterialEntity {
 	private MaterialPurchaseEntity materialPurchase;
 
 	@JsonIgnore
-	@ManyToMany(mappedBy = "materialss")	
+	@ManyToMany(mappedBy = "materials")	
 	private List<TechniqueEntity> techniques;
 }
