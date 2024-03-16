@@ -30,12 +30,6 @@ public class OrderEntity {
     @Column(name = "status")
     private String status;
 
-    // Analizar employees
-
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private EmployeeEntity employee;
-
     @ManyToOne
     @JoinColumn(name = "quote_id")
     private QuoteEntity quote; 
