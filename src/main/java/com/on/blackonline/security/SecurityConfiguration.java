@@ -29,7 +29,7 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authRequest ->
                     authRequest
-                        .requestMatchers("/auth/**").permitAll() // <- Aqui se configura la ruta que se permiten
+                        .requestMatchers(AUTH_WHITELIST).permitAll() // <- Aqui se configura la ruta que se permiten
                         .anyRequest().authenticated() // <- Aqui se configura la ruta que se protegen
                     )
                 .sessionManagement(sessionManagement -> 
@@ -39,4 +39,12 @@ public class SecurityConfiguration {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
+    private static final String[] AUTH_WHITELIST = {
+        "/auth/**",
+        "/doc/swagger-ui.html",
+        "/doc/swagger-ui/**",
+        "/v3/api-docs/**",
+        "/v3/api-docs.yml"
+    };
 }
