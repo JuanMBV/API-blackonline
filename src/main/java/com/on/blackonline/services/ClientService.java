@@ -44,4 +44,8 @@ public class ClientService {
     public void deleteClient(Long id){
         clientRepository.deleteById(id);
     }
+
+    public boolean existsClient(String email) {
+        return clientRepository.findByEmail(email).isPresent();
+    }
 }

@@ -45,6 +45,8 @@ public class SecurityConfiguration {
         "/doc/swagger-ui.html",
         "/doc/swagger-ui/**",
         "/v3/api-docs/**",
-        "/v3/api-docs.yml"
+        "/v3/api-docs.yml",
+        "/email",
+        "/validate-code",
     };
 }
