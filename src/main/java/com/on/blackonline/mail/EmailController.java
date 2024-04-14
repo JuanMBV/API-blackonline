@@ -22,8 +22,6 @@ public class EmailController {
         return emailService.validateEmail(request);
     }
 
-    // Esta mae ya jala si el codigo es correcto, te devuelve un token
-    // Si hay un error con el codigo, hayar la manera de retornar un error
     @PostMapping("/validate-code")
     public ResponseEntity<AuthResponse> validateCode(@RequestBody EmailEntity request) {
         return ResponseEntity.ok(emailService.validateCode(request));
