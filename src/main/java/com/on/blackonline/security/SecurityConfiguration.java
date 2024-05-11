@@ -48,6 +48,7 @@ public class SecurityConfiguration {
         "/v3/api-docs.yml",
         "/email",
         "/validate-code",
-        "/jwt/validate-token"
+        "/jwt/validate-token",
+        "/api/roles"
     };
 }
