@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.on.blackonline.persistences.entities.QuoteEntity;
+import com.on.blackonline.persistences.entities.QuoteRequestEntity;
 import com.on.blackonline.services.QuoteService;
 
 @RestController
@@ -32,8 +33,13 @@ public class QuoteController {
         return quoteService.getQuotes();
     }
 
+    @GetMapping("/pending")
+    public List<QuoteEntity> getPendingCuotes(){
+        return quoteService.getPendingCuotes();
+    }
+
     @PostMapping
-    public QuoteEntity saveQuote(@RequestBody QuoteEntity quote){
+    public QuoteEntity saveQuote(@RequestBody QuoteRequestEntity quote){
         return quoteService.saveQuote(quote);
     }
 

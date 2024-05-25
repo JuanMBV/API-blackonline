@@ -1,18 +1,28 @@
 package com.on.blackonline.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.on.blackonline.persistences.entities.QuoteEntity;
+import com.on.blackonline.persistences.entities.QuoteRequestEntity;
+import com.on.blackonline.persistences.repositories.ClientRepository;
 import com.on.blackonline.persistences.repositories.QuoteRepository;
+import com.on.blackonline.persistences.repositories.WorkRepository;
 
 @Service
 public class QuoteService {
 
     @Autowired
     QuoteRepository quoteRepository;
+
+    @Autowired
+    ClientRepository clientRepository;
+
+    @Autowired
+    WorkRepository workRepository;
 
     public QuoteEntity getQuote(Long id){
         return quoteRepository.findById(id).get();
@@ -22,8 +32,17 @@ public class QuoteService {
         return quoteRepository.findAll();
     }
 
-    public QuoteEntity saveQuote(QuoteEntity quote){
-        return quoteRepository.save(quote);
+    public QuoteEntity saveQuote(QuoteRequestEntity quote){
+        QuoteEntity newQuote = new QuoteEntity();
+
+        newQuote.setTotalPrice(quote.getTotalPrice());
+        newQuote.setQuoteDate(LocalDateTime.now());
+        newQuote.setAdvancePayment(quote.getAdvancePayment());
+        newQuote.setStatus(false);
+        newQuote.setClient(clientRepository.findById(quote.getClientId()).get());
+        newQuote.setWork(workRepository.findById(quote.getWorkId()).get());
+
+        return quoteRepository.save(newQuote);
     }
 
     public QuoteEntity updateQuote(QuoteEntity request, Long id){
@@ -41,4 +60,9 @@ public class QuoteService {
     public void deleteQuote(Long id){
         quoteRepository.deleteById(id);
     }
+
+    public List<QuoteEntity> getPendingCuotes() {
+        return quoteRepository.findByStatus(false);
+    }
 }
+
