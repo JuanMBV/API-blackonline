@@ -49,6 +49,6 @@ public class SecurityConfiguration {
         "/email",
         "/validate-code",
         "/jwt/validate-token",
-        "/api/roles"
+        "/api/**"
     };
 }

@@ -1,6 +1,7 @@
 package com.on.blackonline.auth;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,8 +40,12 @@ public class AuthService {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
         UserDetails client = clientRepository.findByEmail(request.getEmail()).orElseThrow();
         String token = jwtService.getToken(client);
+
+        Optional<ClientEntity> client1 = clientRepository.findByEmail(request.getEmail()); 
+        Long id = client1.get().getClient_id();
         return AuthResponse.builder()
                 .token(token)
+                .id(id)
                 .build();
     }
 
@@ -53,8 +58,12 @@ public class AuthService {
         }
         UserDetails employee = employeeRepository.findByEmail(request.getEmail()).orElseThrow();
         String token = jwtService.getToken(employee);
+
+        Optional<EmployeeEntity> employee1 = employeeRepository.findByEmail(request.getEmail()); 
+        Long id = employee1.get().getEmployee_id();
         return AuthResponse.builder()
                 .token(token)
+                .id(id)
                 .build();
     }
 
@@ -70,9 +79,13 @@ public class AuthService {
 
         clientRepository.save(client);
 
+        Optional<ClientEntity> client1 = clientRepository.findByEmail(request.getEmail()); 
+        Long id = client1.get().getClient_id();
+
         return AuthResponse
                 .builder()
                 .token(jwtService.getToken(client))
+                .id(id)
                 .build();
     }
 
@@ -93,9 +106,13 @@ public class AuthService {
 
         employeeRepository.save(employee);
 
+        Optional<EmployeeEntity> employee1 = employeeRepository.findByEmail(request.getEmail()); 
+        Long id = employee1.get().getEmployee_id();
+
         return AuthResponse
                 .builder()
                 .token(jwtService.getToken(employee))
+                .id(id)
                 .build();
     }
 }
