@@ -38,7 +38,6 @@ public class QuoteService {
         newQuote.setTotalPrice(quote.getTotalPrice());
         newQuote.setQuoteDate(LocalDateTime.now());
         newQuote.setAdvancePayment(quote.getAdvancePayment());
-        newQuote.setStatus(false);
         newQuote.setClient(clientRepository.findById(quote.getClientId()).get());
         newQuote.setWork(workRepository.findById(quote.getWorkId()).get());
 
@@ -59,10 +58,6 @@ public class QuoteService {
 
     public void deleteQuote(Long id){
         quoteRepository.deleteById(id);
-    }
-
-    public List<QuoteEntity> getPendingCuotes() {
-        return quoteRepository.findByStatus(false);
     }
 }
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.on.blackonline.persistences.entities.OrderEntity;
+import com.on.blackonline.persistences.entities.OrderRequest;
 import com.on.blackonline.services.OrderService;
 
 @RestController
@@ -32,9 +33,19 @@ public class OrderController {
         return orderService.getOrders();
     }
 
+    @GetMapping("/status/{status}")
+    public List<OrderEntity> getOrdersByStatus(@PathVariable String status){
+        return orderService.getOrdersByStatus(status);
+    }
+
     @PostMapping
-    public OrderEntity saveOrder(@RequestBody OrderEntity order){
+    public OrderEntity saveOrder(@RequestBody OrderRequest order){
         return orderService.saveOrder(order);
+    }
+
+    @PutMapping("/change-status/{id}/{status}")
+    public OrderEntity changeOrderStatus(@PathVariable String status, @PathVariable Long id){
+        return orderService.changeOrderStatus(status, id);
     }
 
     @PutMapping("/{id}")

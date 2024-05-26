@@ -33,11 +33,6 @@ public class QuoteController {
         return quoteService.getQuotes();
     }
 
-    @GetMapping("/pending")
-    public List<QuoteEntity> getPendingCuotes(){
-        return quoteService.getPendingCuotes();
-    }
-
     @PostMapping
     public QuoteEntity saveQuote(@RequestBody QuoteRequestEntity quote){
         return quoteService.saveQuote(quote);

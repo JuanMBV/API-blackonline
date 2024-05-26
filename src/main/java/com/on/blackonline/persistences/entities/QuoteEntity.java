@@ -30,9 +30,6 @@ public class QuoteEntity {
     @Column(name = "advance_payment")
     private int advancePayment;
 
-    @Column(name = "status")
-    private Boolean status;
-
     @ManyToOne
     @JoinColumn(name = "client_id")
     private ClientEntity client;
