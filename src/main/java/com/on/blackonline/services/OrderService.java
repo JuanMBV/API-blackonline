@@ -8,12 +8,16 @@ import org.springframework.stereotype.Service;
 import com.on.blackonline.persistences.entities.OrderEntity;
 import com.on.blackonline.persistences.entities.OrderRequest;
 import com.on.blackonline.persistences.repositories.OrderRepository;
+import com.on.blackonline.persistences.repositories.QuoteRepository;
 
 @Service
 public class OrderService {
 
     @Autowired
     OrderRepository orderRepository;
+
+    @Autowired
+    QuoteRepository quoteRepository;
 
     public OrderEntity getOrder(Long id){
         return orderRepository.findById(id).get();
@@ -29,6 +33,7 @@ public class OrderService {
         order.setDeliveryDate(orderRequest.getDeliveryDate());
         order.setReference(orderRequest.getReference());
         order.setStatus("PENDING");
+        order.setQuote(quoteRepository.findById(orderRequest.getQuoteId()).get());
 
 
         return orderRepository.save(order);
